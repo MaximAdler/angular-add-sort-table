@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html ng-app="test">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Devster Lab Test</title>
+    <base href="/">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.css"> -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css" charset="utf-8">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.js"></script> -->
+
+    <script src="./js/app.js"></script>
+    <script src="./js/controller.js"></script>
+
+</head>
+
+<body ng-controller="mainController as Ctrl">
+    <div class="jumbotron text-center">
+        <h1>Devster Lab Test</h1>
+    </div>
+    <div class="container srch">
+
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchPerson">
+                </div>
+            </div>
+        </form>
+
+        <table class="table borderless table-striped">
+            <a class='cursor' ng-click="showAdd = !showAdd"><h2>Add New Person<h2></a>
+            <!-- <md-button class="md-primary md-raised" ng-click="showAlert($event)">
+                Alert Dialog
+            </md-button> -->
+            <tbody ng-show='showAdd'>
+                <form data-toggle="validator" role="form" ng-submit="addPerson(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label for="inputName" class="control-label">Name</label>
+                                <input type="text" ng-class="{'error': Uform.$submitted && Uform.name.$error.required}" class="form-control" id="inputName" placeholder="Name" ng-model="people.name" required>
+                                <span ng-show="Uform.name.$error.required && !Uform.name.$pristine && Uform.name.$touched || (Uform.name.$invalid && Uform.$submitted)" class="input-error" required> Write Name!</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputUsername" class="control-label">Username</label>
+                                <input type="text" ng-class="{'error': Uform.$submitted && Uform.name.$error.required}" class="form-control" id="inputUsername" placeholder="Username" ng-model="people.username" required>
+                                <span ng-show="Uform.name.$error.required && !Uform.name.$pristine && Uform.name.$touched || (Uform.name.$invalid && Uform.$submitted)" class="input-error" required> Write Username!</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="control-label">Email</label>
+                                <input type="email" ng-class="{'error': Uform.$submitted && Uform.email.$error.required}" class="form-control" id="inputEmail" placeholder="Email" data-error="Email address is invalid" ng-model="people.email" required>
+                                <span class="input-error" ng-show="Uform.email.$invalid && !Uform.email.$pristine && Uform.email.$touched || Uform.$submitted && Uform.email.$invalid"> Email must have "@"</span>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <label for="inputAddress" class="control-label">Address</label>
+                            <div class="form-group">
+                                <input type="text" ng-class="{'error': Uform.$submitted && Uform.name.$error.required}" class="form-control" id="inputAddress" placeholder="Street" ng-model="people.address.street" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"ng-class="{'error': Uform.$submitted && Uform.name.$error.required}" class="form-control" id="inputAddress" placeholder="Suite" ng-model="people.address.suite" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" ng-class="{'error': Uform.$submitted && Uform.name.$error.required}" class="form-control" id="inputAddress" placeholder="City" ng-model="people.address.city" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number"  class="form-control" id="inputAddress" placeholder="Zipcode" ng-model="people.address.zipcode" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputGeo" class="control-label">Geo</label>
+                                <input type="number" class="form-control" id="inputGeo" placeholder="Latitude" ng-model="people.address.geo.lat" required>
+                                <input type="number" class="form-control" id="inputGeo" placeholder="Longitude" ng-model="people.address.geo.lng" required>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <label for="inputPhone" class="control-label">Phone</label>
+                                <input type="number" id="inputPhone" class="form-control" placeholder="(xxx) xxx-xxxx" ng-minlength="10" ng-maxlength="10" ng-model="people.phone" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputWebsite" class="control-label">Website</label>
+                                <input type="text" class="form-control" id="inputWebsite" placeholder="Website" ng-model="people.website" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCompany" class="control-label">Company</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="inputCompany" placeholder="Name" ng-model="people.company.name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="inputCompany" placeholder="Catch phrase" ng-model="people.company.catchPhrase" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="inputCompany" placeholder="BS" ng-model="people.company.bs" required>
+                                </div>
+                                <button type="button" class="btn btn-success" ng-click="addPerson(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">
+                                    <h5>Add new person</h5></button>
+                              </div>
+                        </td>
+                    </tr>
+                </form>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-striped table-hover">
+
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>
+                        <a class='cursor' ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                  Name
+                  <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                    </td>
+                    <td>
+                        <a class='cursor' ng-click="sortType = 'username'; sortReverse = !sortReverse">
+                Username
+                  <span ng-show="sortType == 'username' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'username' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                    </td>
+                    <td>
+                        <a class='cursor' ng-click="sortType = 'email'; sortReverse = !sortReverse">
+                Email
+                  <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                    </td>
+                    <td>
+                        <a class='cursor' ng-click="sortType = 'address.street'; sortReverse = !sortReverse">
+                      Address
+                    </a>
+                    </td>
+                    <td>Phone</td>
+                    <td>Website</td>
+                    <td>
+                        <a class='cursor' ng-click="sortType='company.name'; sortReverse = !sortReverse">
+                      Company
+                    </a>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="person in people | orderBy:sortType:sortReverse | filter:searchPerson">
+                    <td>{{ person.id }}</td>
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.username }}</td>
+                    <td>{{ person.email }}</td>
+                    <!-- +geo -->
+                    <td>{{ person.address.street }}
+                        <br>{{person.address.suite}}
+                        <br>{{person.address.city}}
+                        <br>{{person.address.zipcode}}
+                        <br> {{ person.getDistance() }}
+                    </td>
+                    <!-- fix form - filter -->
+                    <td>{{person.phone}}</td>
+                    <td>{{person.website}}</td>
+                    <td>{{person.company.name}}
+                        <br>"{{person.company.catchPhrase}}"
+                        <br>{{person.company.bs}}
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        </div>
+</body>
+
+</html>

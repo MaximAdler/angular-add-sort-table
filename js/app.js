@@ -1,4 +1,4 @@
-var test = angular.module('test', []);
+var test = angular.module('test', ['ngAnimate','ngSanitize','ui.bootstrap']);
 // .filter('tel', function () {
 //     return function (tel) {
 //         if (!tel) { return ''; }
@@ -43,5 +43,3 @@ var test = angular.module('test', []);
 //         return (country + " (" + city + ") " + number).trim();
 //     };
 // });
-//
-//'ngRoute','ngMaterial'

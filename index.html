@@ -7,18 +7,20 @@
     <title>Devster Lab Test</title>
     <base href="/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/custom.css" charset="utf-8">
 
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 
     <script src="./js/app.js"></script>
     <script src="./js/controller.js"></script>
-
+    <script src="./js/modalWinController.js"></script>
 </head>
 
 <body ng-controller="mainController as Ctrl">
@@ -36,85 +38,13 @@
             </div>
         </form>
 
-        <table class="table borderless table-striped">
-            <a class='cursor' ng-click="showAdd = !showAdd"><h2>New Person Template<h2></a>
-
-            <!-- <md-button class="md-primary md-raised" ng-click="showAlert($event)"   >
-                Alert Dialog
-            </md-button> -->
-
-            <tbody ng-show='showAdd'>
-                <form data-toggle="validator" name="Uform" role="form" ng-submit="addPerson(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <label for="inputName" class="control-label">Name</label>
-                                <input type="text" name="name" ng-class="{'error': Uform.$submitted && Uform.name.$error.required}" class="form-control" id="inputName" placeholder="Name" ng-model="people.name" required>
-                                <span ng-show="Uform.name.$error.required && !Uform.name.$pristine && Uform.name.$touched || (Uform.name.$invalid && Uform.$submitted)" class="input-error" required> Write Name!</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputUsername" class="control-label">Username</label>
-                                <input type="text" name="surname" ng-class="{'error': Uform.$submitted && Uform.surname.$error.required}" class="form-control" id="inputUsername" placeholder="Username" ng-model="people.username" required>
-                                <span ng-show="Uform.surname.$error.required && !Uform.surname.$pristine && Uform.surname.$touched || (Uform.surname.$invalid && Uform.$submitted)" class="input-error" required> Write Username!</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail" class="control-label">Email</label>
-                                <input type="email" ng-class="{'error': Uform.$submitted && Uform.email.$error.required}" class="form-control" id="inputEmail" name="email" placeholder="Email" data-error="Email address is invalid" ng-model="people.email" required>
-                                <span class="input-error" ng-show="Uform.email.$invalid && !Uform.email.$pristine && Uform.email.$touched || Uform.$submitted && Uform.email.$invalid"> Email must have "@"</span>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </td>
-                        <td>
-                            <label for="inputAddress" class="control-label">Address</label>
-                            <div class="form-group">
-                              <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////ng-model="user.city.value" ng-options="city.value as city.name for city in ctrl.avaliableCities -->
-                                <input type="text" name="street" ng-class="{'error': Uform.$submitted && Uform.street.$error.required}" class="form-control" id="inputAddress" placeholder="Street" ng-model="people.address.street" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="suite" ng-class="{'error': Uform.$submitted && Uform.suite.$error.required}" class="form-control" id="inputAddress" placeholder="Suite" ng-model="people.address.suite" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="city" ng-class="{'error': Uform.$submitted && Uform.city.$error.required}" class="form-control" id="inputAddress" placeholder="City" ng-model="people.address.city" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" name="zipcode" class="form-control" id="inputAddress" placeholder="Zipcode" ng-model="people.address.zipcode" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputGeo" class="control-label">Geo</label>
-                                <input type="number" class="form-control" id="inputGeo" placeholder="Latitude" ng-model="people.address.geo.lat" required>
-                                <input type="number" class="form-control" id="inputGeo" placeholder="Longitude" ng-model="people.address.geo.lng" required>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="form-group">
-                                <label for="inputPhone" class="control-label">Phone</label>
-                                <input type="number" id="inputPhone" class="form-control" placeholder="(xxx) xxx-xxxx" ng-minlength="10" ng-maxlength="10" ng-model="people.phone" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputWebsite" class="control-label">Website</label>
-                                <input type="text" class="form-control" id="inputWebsite" placeholder="Website" ng-model="people.website" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputCompany" class="control-label">Company</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="inputCompany" placeholder="Name" ng-model="people.company.name" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="inputCompany" placeholder="Catch phrase" ng-model="people.company.catchPhrase" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="inputCompany" placeholder="BS" ng-model="people.company.bs" required>
-                                </div>
-                                <button type="button" class="btn btn-success" ng-click="addPerson(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">
-                                    <h5>Add new person</h5></button>
-                              </div>
-                        </td>
-                    </tr>
-                </form>
-                </tr>
-            </tbody>
-        </table>
+        <!-- // -->
+        <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+            <script type="text/ng-template" src="./template/myModalContent.html" id="myModalContent.html"></script>
+            <button type="button" class="btn btn-primary" ng-click="$ctrl.open('lg')">Add New Person</button>
+            <div class="modal-parent"></div>
+        </div>
+        <!-- // -->
 
         <table class="table table-bordered table-striped table-hover">
 
@@ -181,7 +111,7 @@
             </tbody>
 
         </table>
-        </div>
+    </div>
 </body>
 
 </html>

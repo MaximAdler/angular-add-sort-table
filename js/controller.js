@@ -1,105 +1,26 @@
 var test = angular.module('test');
 
-test.controller('mainController', ['$scope', '$http', function($scope, $http) {
+test.controller('mainController', ['$scope', '$http', '$log','$rootScope', function($scope, $http, $log, $rootScope) {
 
     $scope.sortType = 'name';
     $scope.sortReverse = false;
     $scope.searchPerson = '';
 
-    $http.get('https://jsonplaceholder.typicode.com/users').success(function(data) {
-        $scope.people = data;
-    });
+    $http.get('https://jsonplaceholder.typicode.com/users')
+        .success(function(data) {
+            $scope.people = data;
+        })
+        .error(function() {
+            $log.debug('Using user.json');
+            $http.get('./users.json').success(function(data){
+              $scope.people = data;
+            })
+        });
 
-   $scope.showAdd = false;
 
-
-//MODAL DIALOG
-
- //    $scope.status = '  ';
- //    $scope.customFullscreen = false;
- //
- //
- //    var alert;
- // $scope.showAlert = showAlert;
- // $scope.showDialog = showDialog;
- // $scope.items = [1, 2, 3];
- //
- // // Internal method
- // function showAlert() {
- //   alert = $mdDialog.alert({
- //     title: 'Attention',
- //     textContent: 'This is an example of how easy dialogs can be!',
- //     ok: 'Close'
- //   });
- //
- //   $mdDialog
- //     .show( alert )
- //     .finally(function() {
- //       alert = undefined;
- //     });
- // }
- //
- // function showDialog($event) {
- //    var parentEl = angular.element(document.body);
- //    $mdDialog.show({
- //      parent: parentEl,
- //      targetEvent: $event,
- //      template:
- //        '<md-dialog aria-label="List dialog">' +
- //        '  <md-dialog-content>'+
- //        '    <md-list>'+
- //        '      <md-list-item ng-repeat="item in items">'+
- //        '       <p>Number {{item}}</p>' +
- //        '      '+
- //        '    </md-list-item></md-list>'+
- //        '  </md-dialog-content>' +
- //        '  <md-dialog-actions>' +
- //        '    <md-button ng-click="closeDialog()" class="md-primary">' +
- //        '      Close Dialog' +
- //        '    </md-button>' +
- //        '  </md-dialog-actions>' +
- //        '</md-dialog>',
- //      locals: {
- //        items: $scope.items
- //      },
- //      controller: DialogController
- //   });
- //   function DialogController($scope, $mdDialog, items) {
- //     $scope.items = items;
- //     $scope.closeDialog = function() {
- //       $mdDialog.hide();
- //     }
- //   }
- // }
- //    $scope.showAlert = function(ev) {
- //        // Appending dialog to document.body to cover sidenav in docs app
- //        // Modal dialogs should fully cover application
- //        // to prevent interaction outside of dialog
- //        $mdDialog.show(
- //            $mdDialog.alert()
- //            .parent(angular.element(document.querySelector('#popupContainer')))
- //            .clickOutsideToClose(true)
- //            .title('This is an alert title')
- //            .textContent('You can specify some description text in here.')
- //            .ariaLabel('Alert Dialog Demo')
- //            .ok('Got it!')
- //            .targetEvent(ev)
- //        );
- //    };
- //
- //    function DialogController($scope, $mdDialog) {
- //        $scope.hide = function() {
- //            $mdDialog.hide();
- //        };
- //
- //        $scope.cancel = function() {
- //            $mdDialog.cancel();
- //        };
- //
- //        $scope.answer = function(answer) {
- //            $mdDialog.hide(answer);
- //        };
- //    }
+    $rootScope.$on('addPersonRoot',function(){
+      $scope.addPerson();
+    })
 
     $scope.addPerson = function(name, username, email, street, suite, city, zipcode, lat, lng, phone, website, coName, catchPhrase, bs) {
         if (this.people.name) {

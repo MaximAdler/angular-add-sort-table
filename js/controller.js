@@ -11,7 +11,7 @@ test.controller('mainController', ['$scope', '$http', '$log','$rootScope', funct
             $scope.people = data;
         })
         .error(function() {
-            $log.debug('Using user.json');
+            $log.debug('Using users.json');
             $http.get('./users.json').success(function(data){
               $scope.people = data;
             })

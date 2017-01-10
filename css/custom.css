@@ -41,14 +41,23 @@ input[type="email"]:focus::placeholder, input[type="number"]:focus::placeholder,
 select.ng-invalid.ng-touched, select.error {
     border-color: #f00;
 }
+.input-error{
+  color:red;
+}
 
 /*develop*/
+.modal-title{
+  color: rgb(23, 170, 16);
+  font-size: 30px;
+}
 .modal-demo{
   margin-bottom: 20px;
 }
 .form-group{
-  margin-right: 30px;
+  margin-right: 20px;
 }
 .row-mod{
   vertical-align: top;
+  display: inline-block;
+  position: relative;
 }

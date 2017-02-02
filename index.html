@@ -15,6 +15,7 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
 
     <script src="./js/app.js"></script>
@@ -22,6 +23,9 @@
     <script src="./js/modalWinController.js"></script>
     <script src="./js/service.js"></script>
     <script src="./js/directive.js"></script>
+
+    <script src="dist/ngclipboard.min.js"></script>
+
 
 </head>
 
@@ -90,60 +94,60 @@
 
             <tbody>
                 <tr ng-repeat="person in people | orderBy:sortType:sortReverse | filter:searchPerson">
-      <!-- <div ng-hide="editingData[tableData.id]">{{tableData.name | uppercase}}</div>
+                    <!-- <div ng-hide="editingData[tableData.id]">{{tableData.name | uppercase}}</div>
       <div ng-show="editingData[tableData.id]"><input type="text" ng-model="tableData.name" /></div> -->
 
                     <td>{{ person.id }}</td>
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.name }}</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.name' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.name }}</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.name' ng-enter='update(person)' autofocus></div>
                     </td>
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.username }}</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.username' ng-enter='update(person)' autofocus></div>
-                  </td>
+                        <div ng-hide='editingData[person.id]'>{{ person.username }}</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.username' ng-enter='update(person)' autofocus></div>
+                    </td>
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.email }}</div>
-                      <div ng-show='editingData[person.id]'><input type="email" class='edit-input' ng-model='person.email' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.email }}</div>
+                        <div ng-show='editingData[person.id]'><input type="email" class='edit-input' ng-model='person.email' ng-enter='update(person)' autofocus></div>
+                        <button type='button' class='btn btn-info table-btn clipboard-btn' ngclipboard data-clipboard-text={{person.email}}><img src="../assets/images/clipboard.png" alt="Add to Clipboard"></button>
                     </td>
 
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.address.street }},</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.street' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.address.street }},</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.street' ng-enter='update(person)' autofocus></div>
 
-                      <div ng-hide='editingData[person.id]'>{{ person.address.suite }},</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.suite' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.address.suite }},</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.suite' ng-enter='update(person)' autofocus></div>
 
-                      <div ng-hide='editingData[person.id]'>{{ person.address.city }},</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.city' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.address.city }},</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.city' ng-enter='update(person)' autofocus></div>
 
-                      <div ng-hide='editingData[person.id]'>{{ person.address.zipcode }}</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.zipcode' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.address.zipcode }}</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.address.zipcode' ng-enter='update(person)' autofocus></div>
                         <br>Distance to person: {{ person.address.geo }}
                     </td>
-                    <!-- fix form - filter -->
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.phone }}</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.phone' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.phone }}</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.phone' ng-enter='update(person)' autofocus></div>
                     </td>
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.website }}</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.website' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.website }}</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.website' ng-enter='update(person)' autofocus></div>
                     </td>
                     <td>
-                      <div ng-hide='editingData[person.id]'>{{ person.company.name }},</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.company.name' ng-enter='update(person)' autofocus></div>
-                      <br>
-                      <div ng-hide='editingData[person.id]'>"{{ person.company.catchPhrase }}",</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.company.catchPhrase' ng-enter='update(person)' autofocus></div>
-                      <br>
-                      <div ng-hide='editingData[person.id]'>{{ person.company.bs }}</div>
-                      <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.company.bs' ng-enter='update(person)' autofocus></div>
+                        <div ng-hide='editingData[person.id]'>{{ person.company.name }},</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.company.name' ng-enter='update(person)' autofocus></div>
+                        <br>
+                        <div ng-hide='editingData[person.id]'>"{{ person.company.catchPhrase }}",</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.company.catchPhrase' ng-enter='update(person)' autofocus></div>
+                        <br>
+                        <div ng-hide='editingData[person.id]'>{{ person.company.bs }}</div>
+                        <div ng-show='editingData[person.id]'><input type="text" class='edit-input' ng-model='person.company.bs' ng-enter='update(person)' autofocus></div>
                     </td>
                     <td>
-                      <button type='button' class='btn btn-warning table-btn' ng-hide="editingData[person.id]" ng-click="modify(person)"><img src="../assets/images/edit.png" alt="Edit"></button>
-                      <button type='button' class='btn btn-success table-btn' ng-show="editingData[person.id]" ng-click="update(person)"><img src="../assets/images/update.png" alt="Edit"></button>
-                      <button type='button' class='btn btn-danger table-btn' ng-hide="viewField" ng-click="remove(person.id)"><img src="../assets/images/delete.png" alt="Remove"></button>
+                        <button type='button' class='btn btn-warning table-btn' ng-hide="editingData[person.id]" ng-click="modify(person)"><img src="../assets/images/edit.png" alt="Edit"></button>
+                        <button type='button' class='btn btn-success table-btn' ng-show="editingData[person.id]" ng-click="update(person)"><img src="../assets/images/update.png" alt="Edit"></button>
+                        <button type='button' class='btn btn-danger table-btn' ng-hide="viewField" ng-click="remove(person.id)"><img src="../assets/images/delete.png" alt="Remove"></button>
                     </td>
                 </tr>
             </tbody>

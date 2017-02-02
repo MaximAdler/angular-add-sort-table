@@ -41,7 +41,7 @@
 
         <!-- // -->
         <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
-            <script type="text/ng-template" src="./template/myModalContent.html" id="myModalContent.html"></script>
+            <script type="ng-template" src="./template/ModalContent.html" id="myModalContent.html"></script>
             <button type="button" class="btn btn-primary" ng-click="$ctrl.open('lg')">Add New Person</button>
             <div class="modal-parent"></div>
         </div>
@@ -94,18 +94,18 @@
                     <td>{{ person.name }}</td>
                     <td>{{ person.username }}</td>
                     <td>{{ person.email }}</td>
-                    <!-- +geo -->
-                    <td>{{ person.address.street }}
-                        <br>{{person.address.suite}}
-                        <br>{{person.address.city}}
-                        <br>{{person.address.zipcode}}
-                        <br> {{ person.getDistance() }}
+
+                    <td>{{ person.address.street }},
+                        <br>{{person.address.suite}},
+                        <br>{{person.address.city}},
+                        <br>{{person.address.zipcode}},
+                        <br>Distance to person: {{ person.address.geo }}
                     </td>
                     <!-- fix form - filter -->
                     <td>{{person.phone}}</td>
                     <td>{{person.website}}</td>
-                    <td>{{person.company.name}}
-                        <br>"{{person.company.catchPhrase}}"
+                    <td>{{person.company.name}},
+                        <br>"{{person.company.catchPhrase}}",
                         <br>{{person.company.bs}}
                     </td>
                 </tr>

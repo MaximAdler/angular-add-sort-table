@@ -14,7 +14,6 @@ body {
   text-decoration: none;
 }
 
-
 /*validation*/
 input[type="email"], input[type="number"], input[type="text"] {
     margin: 5px 0;

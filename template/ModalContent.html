@@ -2,7 +2,7 @@
     <h3 class="modal-title" id="modal-title">New person</h3>
 </div>
 
-<form data-toggle="validator" name="Uform" role="form" ng-submit="addPerson(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">
+<form data-toggle="validator" name="Uform" role="form" ng-submit="ok(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">
 <div class="modal-body" id="modal-body">
           <!-- <ul>
                <li ng-repeat="item in $ctrl.items">
@@ -80,7 +80,9 @@
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">Submit</button>
+  <!-- <button type="button" class="btn btn-success" ng-click="addPerson(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)"> -->
+
+    <button class="btn btn-success" type="button" ng-click="$ctrl.ok(name,username,email,street,suite,city,zipcode,lat,lng,phone,website,coName,catchPhrase,bs)">Submit</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
 </div>
       </form>

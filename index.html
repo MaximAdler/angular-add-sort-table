@@ -16,16 +16,13 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
-
+    <script data-require="ui-bootstrap@*" data-semver="0.10.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
     <script src="./js/app.js"></script>
-    <script src="./js/controller.js"></script>
-    <script src="./js/modalWinController.js"></script>
+    <script src="./js/mainController.js"></script>
     <script src="./js/service.js"></script>
     <script src="./js/directive.js"></script>
 
     <script src="dist/ngclipboard.min.js"></script>
-
 
 </head>
 
@@ -44,11 +41,7 @@
             </div>
         </form>
 
-        <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
-            <script type="ng-template" src="./template/ModalContent.html" id="myModalContent.html"></script>
-            <button type="button" class="btn btn-primary" ng-click="$ctrl.open('lg')">Add New Person</button>
-            <div class="modal-parent"></div>
-        </div>
+        <a class="btn btn-primary modal-win" data-toggle="modal" ng-click="openPopupScreen()">Add New Person</a>
 
         <table class="table table-bordered table-striped table-hover">
 
@@ -94,9 +87,6 @@
 
             <tbody>
                 <tr ng-repeat="person in people | orderBy:sortType:sortReverse | filter:searchPerson">
-                    <!-- <div ng-hide="editingData[tableData.id]">{{tableData.name | uppercase}}</div>
-      <div ng-show="editingData[tableData.id]"><input type="text" ng-model="tableData.name" /></div> -->
-
                     <td>{{ person.id }}</td>
                     <td>
                         <div ng-hide='editingData[person.id]'>{{ person.name }}</div>

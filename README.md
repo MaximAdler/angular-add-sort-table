@@ -1,2 +1,9 @@
 # angular-add-sort-table
-Angular-Add-Sort-Table
+
+### Install
+
+```Shell
+git clone https://github.com/MaximAdler/angular-add-sort-table.git
+npm i -g serve
+serve
+```

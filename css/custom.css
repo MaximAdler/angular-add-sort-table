@@ -78,16 +78,24 @@ select.ng-invalid.ng-touched, select.error {
     max-width: 100px;
 }
 
-
-/*develop*/
-
 .modal-title {
     color: rgb(23, 170, 16);
     font-size: 30px;
 }
 
-.modal-demo {
+.modal-win{
     margin-bottom: 20px;
+}
+.app-modal-window .modal-dialog {
+  min-width: 75%;
+}
+
+/*fix*/
+@media only screen and (max-width: 600px) {
+  .app-modal-window .modal-dialog {
+    max-width: 40%;
+    min-width: 40%;
+  }
 }
 
 .form-group {

@@ -11,7 +11,9 @@ test.service('dataService', function($http, $log) {
             })
             .error(function() {
                 $log.debug('Data is from users.json')
-                $http.get('../assets/data/users.json', {
+                $http({
+                    method: 'GET',
+                    url: '../assets/data/users.json',
                     cache: true
                 }).then(function(resp) {
                     return resp.data

@@ -1,4 +1,5 @@
-var test = angular.module('test', ['ngAnimate','ngSanitize','ui.bootstrap']);
+var test = angular.module('test', ['ngAnimate','ngSanitize','ui.bootstrap'])
+
 // .filter('tel', function () {
 //     return function (tel) {
 //         if (!tel) { return ''; }

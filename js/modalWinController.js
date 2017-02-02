@@ -1,9 +1,47 @@
 var test = angular.module('test');
 
-test.controller('ModalDemoCtrl', ['$uibModal', '$log','$document', function ($uibModal, $log, $document) {
+test.controller('ModalDemoCtrl', ['$http','$scope','$uibModal', '$log','$document', function ($http, $scope, $uibModal, $log, $document, Data) {
   var $ctrl = this;
+
+
+  $scope.addPerson = function(name, username, email, street, suite, city, zipcode, lat, lng, phone, website, coName, catchPhrase, bs) {
+      if (this.people.name) {
+          $scope.people.push({
+              id: $scope.people.length + 1,
+              name: $scope.people.name,
+              username: $scope.people.username,
+              email: $scope.people.email,
+              street: $scope.people.address.street,
+              suite: $scope.people.address.suite,
+              city: $scope.people.address.city,
+              zipcode: $scope.people.address.zipcode,
+              lat: $scope.people.address.geo.lat,
+              lng: $scope.people.address.geo.lng,
+              phone: $scope.people.phone,
+              website: $scope.people.website,
+              coName: $scope.people.company.name,
+              catchPhrase: $scope.people.company.catchPhrase,
+              bs: $scope.people.company.bs
+          })
+          $scope.people.name = '';
+          $scope.people.username = '';
+          $scope.people.email = '';
+          $scope.people.address.street = '';
+          $scope.people.address.suite = '';
+          $scope.people.address.city = '';
+          $scope.people.address.zipcode = '';
+          $scope.people.address.geo.lat = '';
+          $scope.people.address.geo.lng = '';
+          $scope.people.phone = '';
+          $scope.people.website = '';
+          $scope.people.company.name = '';
+          $scope.people.company.catchPhrase = '';
+          $scope.people.company.bs = '';
+      }
+  }
+
   //
-  $ctrl.items = ['1','2'];
+  $ctrl.items = [];
   //
 
   $ctrl.open = function (size, parentSelector) {
@@ -45,7 +83,9 @@ test.controller('ModalInstanceCtrl',['$uibModalInstance','items','$scope', '$roo
 
 //submit must be there
   $ctrl.ok = function () {
-    $uibModalInstance.close($ctrl.selected.item);
+    //fix
+    $scope.$emit('addPerson',{})
+    $uibModalInstance.close('closed');
     // $rootScope.$emit('addPersonRoot',{});
   };
 
@@ -54,7 +94,6 @@ test.controller('ModalInstanceCtrl',['$uibModalInstance','items','$scope', '$roo
   };
 }]);
 
-// Please note that the close and dismiss bindings are from $uibModalInstance.
 
 test.component('modalComponent', {
   templateUrl: './template/myModalContent.html',
@@ -68,7 +107,7 @@ test.component('modalComponent', {
 
     $ctrl.ok = function () {
       //main mb
-      $ctrl.close({$value: $ctrl.selected.item});
+      $ctrl.close({$value: 1});
           // $rootScope.$emit('addPersonRoot',{});
     };
 

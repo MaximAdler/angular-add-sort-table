@@ -1,62 +1,56 @@
 var test = angular.module('test');
 
-test.controller('mainController', ['$scope', '$http', '$log','$rootScope', function($scope, $http, $log, $rootScope) {
+test.controller('mainController', function($scope, $http, $log, dataService, $rootScope) {
 
     $scope.sortType = 'name';
     $scope.sortReverse = false;
     $scope.searchPerson = '';
 
-    $http.get('https://jsonplaceholder.typicode.com/users')
-        .success(function(data) {
-            $scope.people = data;
-        })
-        .error(function() {
-            $log.debug('Using users.json');
-            $http.get('./users.json').success(function(data){
-              $scope.people = data;
-            })
-        });
 
+    dataService.getData().then(function(data) {
+      $scope.people = data;
+    });
 
-    $rootScope.$on('addPersonRoot',function(){
-      $scope.addPerson();
+    $scope.$watch('people', function(newValue, oldValue) {
+        if (newValue != oldValue) dataService.setData(newValue)
     })
 
-    $scope.addPerson = function(name, username, email, street, suite, city, zipcode, lat, lng, phone, website, coName, catchPhrase, bs) {
-        if (this.people.name) {
-            $scope.people.push({
-                id: $scope.people.length + 1,
-                name: $scope.people.name,
-                username: $scope.people.username,
-                email: $scope.people.email,
-                street: $scope.people.address.street,
-                suite: $scope.people.address.suite,
-                city: $scope.people.address.city,
-                zipcode: $scope.people.address.zipcode,
-                lat: $scope.people.address.geo.lat,
-                lng: $scope.people.address.geo.lng,
-                phone: $scope.people.phone,
-                website: $scope.people.website,
-                coName: $scope.people.company.name,
-                catchPhrase: $scope.people.company.catchPhrase,
-                bs: $scope.people.company.bs
-            })
-            $scope.people.name = '';
-            $scope.people.username = '';
-            $scope.people.email = '';
-            $scope.people.address.street = '';
-            $scope.people.address.suite = '';
-            $scope.people.address.city = '';
-            $scope.people.address.zipcode = '';
-            $scope.people.address.geo.lat = '';
-            $scope.people.address.geo.lng = '';
-            $scope.people.phone = '';
-            $scope.people.website = '';
-            $scope.people.company.name = '';
-            $scope.people.company.catchPhrase = '';
-            $scope.people.company.bs = '';
-        }
-    }
+
+    // $scope.addPerson = function(name, username, email, street, suite, city, zipcode, lat, lng, phone, website, coName, catchPhrase, bs) {
+    //     if (this.people.name) {
+    //         $scope.people.push({
+    //             id: $scope.people.length + 1,
+    //             name: $scope.people.name,
+    //             username: $scope.people.username,
+    //             email: $scope.people.email,
+    //             street: $scope.people.address.street,
+    //             suite: $scope.people.address.suite,
+    //             city: $scope.people.address.city,
+    //             zipcode: $scope.people.address.zipcode,
+    //             lat: $scope.people.address.geo.lat,
+    //             lng: $scope.people.address.geo.lng,
+    //             phone: $scope.people.phone,
+    //             website: $scope.people.website,
+    //             coName: $scope.people.company.name,
+    //             catchPhrase: $scope.people.company.catchPhrase,
+    //             bs: $scope.people.company.bs
+    //         })
+    //         $scope.people.name = '';
+    //         $scope.people.username = '';
+    //         $scope.people.email = '';
+    //         $scope.people.address.street = '';
+    //         $scope.people.address.suite = '';
+    //         $scope.people.address.city = '';
+    //         $scope.people.address.zipcode = '';
+    //         $scope.people.address.geo.lat = '';
+    //         $scope.people.address.geo.lng = '';
+    //         $scope.people.phone = '';
+    //         $scope.people.website = '';
+    //         $scope.people.company.name = '';
+    //         $scope.people.company.catchPhrase = '';
+    //         $scope.people.company.bs = '';
+    //     }
+    // }
 
     //position...
     // http://stackoverflow.com/questions/13840516/how-to-find-my-distance-to-a-known-location-in-javascript
@@ -85,4 +79,4 @@ test.controller('mainController', ['$scope', '$http', '$log','$rootScope', funct
     }
 
 
-}])
+})
